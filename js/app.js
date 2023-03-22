@@ -20,6 +20,9 @@ Cart.prototype.addItem = function(product, quantity) {
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  let stringify = JSON.stringify(state.cart);
+  localStorage.setItem('cart', stringify);
+
 };
 
 Cart.prototype.removeItem = function(item) {
