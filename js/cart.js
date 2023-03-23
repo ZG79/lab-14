@@ -16,14 +16,16 @@ function renderCart() {
   clearCart();
   showCart();
   console.log(state.cart.items)
+  state.cart.updateCounter();
 }
 
 let tbody = document.querySelector('#cart tbody');
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
-  for (let i = 1; i<table.rows.length; i++){
+  for (let i = 0; i<tbody.rows.length; i++){
     tbody.deleteRow(i); 
   }
+  console.log('table row length:', table.rows.length);
 }
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
@@ -57,14 +59,25 @@ function showCart() {
 }
 
 function removeItemFromCart(event) {
-  let deleteBtns = document.querySelectorAll('.delete-btn');
-  for(let i = 0; i < deleteBtns.length; i++) {
-    deleteBtns[i].addEventListener('click', state.cart.removeItem);
+  // let deleteBtns = document.querySelectorAll('.delete-btn');
+  // for(let i = 0; i < deleteBtns.length; i++) {
+  //   deleteBtns[i].addEventListener('click', state.cart.removeItem);
+  // }
+  let targetId = event.target.id;
+  let deleteButtons = document.querySelectorAll('deleteButton');
+  for(let i = 0; i < deleteButtons.length; i++){
+    deleteButtons[i].addEventListener('click', removeItemFromCart);
   }
+  state.cart.removeItem(targetId);
+  renderCart();
 
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table
+  // let target = event.target.id;
+  // state.cart.removeItem(target);
+  // state.cart.saveToLocalStorage();
+  // renderCart();
 
 }
 
