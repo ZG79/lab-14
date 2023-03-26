@@ -22,8 +22,9 @@ function renderCart() {
 let tbody = document.querySelector('#cart tbody');
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
-  for (let i = 0; i<tbody.rows.length; i++){
-    tbody.deleteRow(i); 
+  const tableRows = document.querySelectorAll('#cart tbody tr')
+  for (let i = 0; i<tableRows.length; i++){
+    tableRows[i].remove(); 
   }
   console.log('table row length:', table.rows.length);
 }
@@ -63,13 +64,23 @@ function removeItemFromCart(event) {
   // for(let i = 0; i < deleteBtns.length; i++) {
   //   deleteBtns[i].addEventListener('click', state.cart.removeItem);
   // }
-  let targetId = event.target.id;
-  let deleteButtons = document.querySelectorAll('deleteButton');
-  for(let i = 0; i < deleteButtons.length; i++){
-    deleteButtons[i].addEventListener('click', removeItemFromCart);
+  if (event.target.classList.contains('delete-btn')){
+    state.cart.removeItem(parseInt(event.target.id));
+    state.cart.saveToLocalStorage();
+    renderCart();
   }
-  state.cart.removeItem(targetId);
-  renderCart();
+  // let targetId = event.target.id;
+
+  // let deleteButtons = document.querySelectorAll('deleteButton');
+
+
+
+  // for(let i = 0; i < deleteButtons.length; i++){
+  //   deleteButtons[i].addEventListener('click', removeItemFromCart);
+  // }
+  // state.cart.removeItem(targetId);
+  
+  
 
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
