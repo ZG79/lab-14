@@ -45,9 +45,10 @@ function handleSubmit(event) {
 
   state.cart.saveToLocalStorage();
   state.cart.updateCounter();
-  // updateCartPreview(state.cart.items[state.cart.items.length - 1]);
+  updateCartPreview(state.cart.items[state.cart.items.length - 1]);
+  event.target.reset();
   // updateCartPreview(state.cart.items.pop());
-  updateCartPreview(state.cart.items.pop());
+  // updateCartPreview(state.cart.items.pop());
 
 }
 
@@ -55,9 +56,9 @@ function handleSubmit(event) {
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
   // how do I return the value of a specific item?
-  let item = document.getElementById('items').value;
+  const item = document.getElementById('items').value;
   // TODO: get the quantity
-  let quantity = document.getElementById('quantity').value;
+  const quantity = document.getElementById('quantity').value;
   // TODO: using those, add one item to the Cart
   state.cart.addItem(item, quantity);
   console.log('ALL OF STATE', state.cart);
@@ -69,8 +70,8 @@ function updateCartPreview(item) {
   // console.log('POP ---->', state.cart.items.pop());
   // TODO: Get the item and quantity from the form
   // let item = state.cart.items.pop();
-  let product = item.product;
-  let quantity = item.quantity;
+  const product = item.product;
+  const quantity = item.quantity;
   console.log(product, quantity);
 
   // TODO: Add a new element to the cartContents div with that information
